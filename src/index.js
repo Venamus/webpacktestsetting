@@ -1,21 +1,27 @@
 require('./assets/stylesheets/styles.scss');
 
-
 $(document).ready(function(){
-	var tablename = '';
-	var tableTodo = '<div class="panel panel-primary"><table class="table table-striped experiment"><tr><th>'+tablename+'</th></tr><tr><td class="draggable-row"><input class="completed-taskBox" type="checkbox"></td></tr></table></div>'
+	let tablename = '';
+	let $tableTodo = `<div class="tables-container"><table class="table table-stripped"><tr><th>${tablename}</th></tr><tr><td><button>Add</button></td></tr></table></div>`
+	let tableRowInput = '';
 
-	$(".input-table").on('focus', function(){
-		$('.input-table').addClass('active');
+	$('.add-tableRow').on('focus',() => {
+		$('.add-tablerowBtn').addClass('active');
+		$('.add-tableRow').addClass('active')
+	});
+
+	$('.add-tableInput').on('focus',() => {
+		$('.add-tableInput').addClass('active');
 		$('.add-tableBtn').addClass('active');
 	});
 
-	$('.add-tableBtn').click(function(){
-		$('.input-table').removeClass('active');
+	$('.add-tableBtn').click(() => {
+		$('.add-tableInput').removeClass('active');
 		$('.add-tableBtn').removeClass('active');
-		tablename = $('.input-table').val();
+		tablename = $('.add-tableInput').val();
 
-		$(document).html(tableTodo);
+		console.log(tablename);
+		$(document).html($tableTodo);
 
 	});
 });

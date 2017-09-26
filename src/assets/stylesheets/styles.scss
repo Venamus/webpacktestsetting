@@ -13,6 +13,15 @@ html,body {
 			background-color: white;
 			height: 100%;
 			border: 2px solid gray;
+			.add-tablerowBtn {
+				display: none;
+				&.active {
+					display: inline-block;
+				}
+			}
+			.add-tableRow {
+				border: 0;
+			}
 		}
 	}
 	.add-tableContainer {
@@ -21,14 +30,20 @@ html,body {
 	    margin-top: 2rem;
 	    .add-tableInput{
 	    	width: 9rem;
+	    	transition: all 1s;
 	    	&.active {
 				width: 19rem;
+				transition: all 1s;
 	    	}
 	    }
 	    .add-tableBtn{
 	    	display: none;
+	    	opacity: 0;
+	    	transition: all 1s;
 	    	&.active {
 				display: inline-block;
+				opacity: 1;
+				transition: all 1s;
 	    	}
 	    }
 	}

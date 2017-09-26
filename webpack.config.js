@@ -3,30 +3,27 @@ const path                      = require('path');
 const ExtractTextWebpackPlugin  = require('extract-text-webpack-plugin');
 const UglifyJsPlugin            = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssets         = require('optimize-css-assets-webpack-plugin');
-const $                         = require('jquery');
-
-
 
 let config = {
-	entry: './src/index.js',
-	output: {
+  entry: './src/index.js',
+  output: {
     path: path.resolve(__dirname, './public'),
-		filename: 'bundle.js'
-	},
-	module: {
-   	rules: [
-    	{
-      	test: /\.js$/, // files ending with .js
-      	exclude: /node_modules/, // exclude the node_modules directory
-      	loader: "babel-loader" // use this (babel-core) loader
-    	},
-    	{
-    		test: /\.scss$/, //All files ending with .scss
+    filename: 'bundle.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/, // files ending with .js
+        exclude: /node_modules/, // exclude the node_modules directory
+        loader: "babel-loader" // use this (babel-core) loader
+      },
+      {
+        test: /\.scss$/, //All files ending with .scss
         use: ExtractTextWebpackPlugin.extract({
             use: ['css-loader', 'sass-loader'],
             fallback: 'style-loader'
         })
-    	},
+      },
       {
         test: /\.jsx$/,
         loader: 'babel-loader',
@@ -59,10 +56,11 @@ let config = {
   },
   plugins: [
     new ExtractTextWebpackPlugin('styles.css'),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
-    })
+      new webpack.ProvidePlugin({
+        jQuery: 'jquery',
+        $: 'jquery',
+        jquery: 'jquery'
+      })
   ],
   devServer: {
     contentBase: path.resolve(__dirname, './public'),
