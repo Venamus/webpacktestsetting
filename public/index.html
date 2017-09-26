@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Webpack</title>
+	<link rel="stylesheet" href="styles.css"> <!-- webpack stylesheet output -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+	<div class="tables-vw">
+		<div class="tables-container">
+			<table class="table table-stripped">
+				<tr>
+					<th>To do</th>
+				</tr>
+				<tr>
+					<td><button>Add</button></td>
+				</tr>
+			</table>
+		</div>
+		<div class="tables-container">
+			<table class="table table-stripped inProgress-table">
+				<tr>
+					<th>In progress</th>
+				</tr>
+
+			</table>
+		</div>
+		<div class="tables-container">
+			<table class="table table-stripped completed-table">
+				<tr>
+					<th>Completed</th>
+				</tr>
+			</table>
+		</div>
+		<div class="add-tableContainer">
+			<input type="text" placeholder="Table Name..." class='add-tableInput'>
+			<button class="btn btn-success add-tableBtn">Add</button>
+		</div>
+	</div>
+<!-- ======== Script ======== -->
+	<script src="bundle.js"></script> <!-- webpack javascript output -->
+</body>
+</html>
