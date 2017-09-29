@@ -40,6 +40,8 @@
     "webpack-dev-server": "^2.8.2"
   },
   "dependencies": {
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "jquery-ui-bundle": "^1.12.1",
+    "webpack-jquery-ui": "^1.0.0"
   }
 }
