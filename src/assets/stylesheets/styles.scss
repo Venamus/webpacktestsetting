@@ -2,6 +2,10 @@ html,body {
 	background-color: rgb(0, 121, 191) !important;
 	height: 100%;
 }
-.table-info{
-	display: none;
+.table-info-container{
+	background-color:#e8e8e8;
+	padding: 2rem;
+	table:last-child{
+		margin-top: 2rem;
+	}
 }
