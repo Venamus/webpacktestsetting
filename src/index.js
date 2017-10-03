@@ -3,6 +3,7 @@ require('./assets/stylesheets/styles.scss');
 
 $(document).ready( function() {
 
+	//Generate Table on Body
 	$(".btn-default").on("click",function(e){
 		e.preventDefault();
 		const tableNames = $(".form-control").val();
@@ -10,25 +11,35 @@ $(document).ready( function() {
 
 		$(".tables-container").append($generatedTable);
 	});
-	$("body").on('click','.row-insertedComment', function() {
-		const $parentTable = $(this).parent().parent();
-		const $tableHeader = $parentTable.parent().parent().find('.panel-heading').text();
-		const $infoTable = `<div class="col-sm-4 col-md-3 table-info-container"><div class="panel panel-default"><div class="panel-heading">Tables Info</div><div class="panel-body"><table class="info-holder"><th>${"Name of table: "+$tableHeader}</th></table><table class="info-holder"><th>Comments</th></table></div><div class="panel-footer"><input type="text" class="form-control add-tableRow table-input" placeholder="Enter new Comment..."><button class="btn btn-primary btn-block table-btn">Enter new Comment</button></div></div></div>`;
+	// $("body").on('click','.row-insertedComment', function() {
+	// 	const $parentTable = $(this).parent().parent();
+	// 	const $tableHeader = $parentTable.parent().parent().find('.panel-heading').text();
+	// 	let currentComments = {};
 
-		if ($infoTable.length) {
-				return console.log("hola")
-		} if($infoTable.length === 0 ){
-			$("body").append($infoTable);
-		}
+	// 	currentComments.commetns
+
+	// 	$(".info-holder").text(``);
+	// 	$(".info-holder").append(`<tr><td>${"Name of table: "+$tableHeader}</td></tr>`);
+
+	// });
+
+	//Insert InfoTable on Body
+	let currentComments = {};
+	$('body').on('click','.row-insertedComment',function(){
+		currentComments = $(this).data('comments');
+		console.log(currentComments);
 	});
+
+
+	//Insert Comments on Tables function
 	$("body").on('click','.btn', function() {
-		const $parentTable = $(this).parent().parent();
-		const rowValue = $parentTable.find(".table-input").val();
-		const $selectedTable = $parentTable.find(".items-holder");
-		const $selectedInfo = $parentTable.find(".info-holder");
+		const $parentTable = $(this).parent().parent(); //Going into parents div.
+		const rowValue = $parentTable.find(".table-input").val(); //Getting the value from the input.
+		const $selectedTable = $parentTable.find(".items-holder"); //Finding the table on the parent and storing them into a variable.
+		const $selectedInfo = $parentTable.find(".info-holderComments"); //Finding the Table of the comments and sotring them into a variable.
 
-		$selectedInfo.append(`<tr><td class="row-insertedComment">${rowValue}</td></tr>`);
+		//Append Comments.
+		$selectedInfo.append(`<tr><td>${rowValue}</td></tr>`);
 		$selectedTable.append(`<tr><td class="row-insertedComment">${rowValue}</td></tr>`);
-
 	});
 });
