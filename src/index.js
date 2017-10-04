@@ -1,45 +1,59 @@
-require('./assets/stylesheets/styles.scss');
+
+import './assets/stylesheets/styles.scss'
+import shortid from 'shortid';
+import './vendor/jquery-ui';
+
+const $itemBtnTpl = $('<button class="btn btn-success btn-block row-insertedComment"></button>');
+let currenItem = {};
+
 
 
 $(document).ready( function() {
 
 	//Generate Table on Body
-	$(".btn-default").on("click",function(e){
+	$(".addTable-btn").on("click",function(e){
 		e.preventDefault();
 		const tableNames = $(".form-control").val();
-		const $generatedTable = `<div class="col-sm-4 col-md-3"><div class="panel panel-default"><div class="panel-heading">${tableNames}</div><div class="panel-body"><table class="items-holder"></table></div><div class="panel-footer"><input type="text" class="form-control add-tableRow table-input" placeholder="Enter new item..."><button class="btn btn-primary btn-block table-btn">Add</button></div></div></div>`;
+		const $generatedTable = `<div class="col-sm-4 col-md-3"><div class="panel panel-default"><div class="panel-heading">${tableNames}</div><div class="panel-body"><table class="items-holder"></table></div><div class="panel-footer"><form action="" class="itemForm"><input type="text" class="form-control add-tableRow table-input" placeholder="Enter new item..." required><button class="btn btn-primary btn-block table-btn">Add</button></form></div></div>`;
 
 		$(".tables-container").append($generatedTable);
 	});
-	// $("body").on('click','.row-insertedComment', function() {
-	// 	const $parentTable = $(this).parent().parent();
-	// 	const $tableHeader = $parentTable.parent().parent().find('.panel-heading').text();
-	// 	let currentComments = {};
 
-	// 	currentComments.commetns
-
-	// 	$(".info-holder").text(``);
-	// 	$(".info-holder").append(`<tr><td>${"Name of table: "+$tableHeader}</td></tr>`);
-
-	// });
-
-	//Insert InfoTable on Body
-	let currentComments = {};
 	$('body').on('click','.row-insertedComment',function(){
-		currentComments = $(this).data('comments');
-		console.log(currentComments);
+
+		currenItem = JSON.parse($(this).data('element'));
+		console.log(currenItem);
+		// setItems(currenItem);
 	});
+
+	// function setItems(currentItem) {
+
+	// }
 
 
 	//Insert Comments on Tables function
-	$("body").on('click','.btn', function() {
-		const $parentTable = $(this).parent().parent(); //Going into parents div.
-		const rowValue = $parentTable.find(".table-input").val(); //Getting the value from the input.
-		const $selectedTable = $parentTable.find(".items-holder"); //Finding the table on the parent and storing them into a variable.
-		const $selectedInfo = $parentTable.find(".info-holderComments"); //Finding the Table of the comments and sotring them into a variable.
+	$("body").find('.itemForm').on('submit', function(e) {
+		e.preventDefault();
 
-		//Append Comments.
-		$selectedInfo.append(`<tr><td>${rowValue}</td></tr>`);
-		$selectedTable.append(`<tr><td class="row-insertedComment">${rowValue}</td></tr>`);
+		const $parentTable = $(this).parent().parent(); //Going into parents div.
+		const $selectedTable = $parentTable.find(".items-holder"); //Finding the table on the parent and storing them into a variable.
+		const $btn = $itemBtnTpl.clone();
+		const newItem = {
+			id: shortid.generate(),
+			title: $parentTable.find(".table-input").val(),
+			commentsArray: []
+		};
+
+
+		if (newItem.title == "") {
+			alert("Necesita Agregar un Valor");
+			return;
+		}
+
+		$btn.attr('id', newItem.id);
+		$btn.text(newItem.title);
+		$btn.data('element',`${JSON.stringify(newItem)}`);
+		$selectedTable.append($btn);
+		$parentTable.find(".table-input").val('');
 	});
 });
