@@ -2,19 +2,47 @@ html,body {
 	background-color: rgb(0, 121, 191) !important;
 	height: 100%;
 }
-.table-info-container{
-	background-color:#e8e8e8;
-	padding: 2rem;
-	margin-left: 0px;
-	opacity: 1;
-	transition: all, 1.3s;
-	&.hide{
-		opacity: 0;
-		margin-left: -200px;
+.navbar-default{
+	position: fixed !important;
+	width: 100%;
+}
+.tables-container{
+	.table-info-container{
+		background-color:#e8e8e8;
+		padding: 2rem;
+		margin-left: -400px;
+		width: 30rem;
+
+		&.active{
+			margin-left: 0px;
+			transition: all 1s;
+		}
+		opacity: 1;
 		transition: all, 1.3s;
+		&.hide{
+			opacity: 0;
+			margin-left: -200px;
+			transition: all, 1.3s;
+		}
+		table:last-child{
+			margin-top: 2rem;
+		}
 	}
-	table:last-child{
-		margin-top: 2rem;
+}
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+}
+
+.row-container{
+	margin-top: 7rem;
+	.separated-table{
+		width: 31rem;
 	}
 }
 .panel-default{
